@@ -1,6 +1,9 @@
-namespace Tarea5.Data.UnitOfWorck;
+using Tarea5.Data.Repository;
 
-public interface IUnitOfWork
+namespace Tarea5.Data.UnitOfWork;
+
+public interface IUnitOfWork : IDisposable  
 {
-    
+    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
+    Task<int> SaveChangesAsync();
 }
