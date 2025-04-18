@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Tarea5.Data;
+using Tarea5.Data.UnitOfWork;
+using Tarea5.Services.Implementations;
+using Tarea5.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TiendaActividadContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 41))));
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
